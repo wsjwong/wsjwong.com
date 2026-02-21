@@ -42,6 +42,14 @@ I'm Peter Steinberger, an iOS developer, entrepreneur, and open source contribut
 
 This site is set up for easy deployment on Vercel. Just connect your GitHub repository to Vercel, and it will automatically build and deploy the site when changes are pushed.
 
+## Newsletter subscription
+
+The newsletter form submits to the local endpoint `POST /api/subscribe` (Cloudflare Pages Function in `functions/api/subscribe.ts`).
+
+Required env var (set in your Cloudflare Pages project or local env):
+
+- `NEON_DATABASE_URL` (preferred) or `DATABASE_URL` (Postgres connection string)
+
 ## License
 
 This repository uses dual licensing:

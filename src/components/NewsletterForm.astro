@@ -14,12 +14,12 @@ const { variant = "default" } = Astro.props;
   )}
   
   <form
-    action="https://buttondown.com/api/emails/embed-subscribe/steipete"
+    data-newsletter-form
+    action="/api/subscribe"
     method="post"
-    target="_blank"
     class="flex flex-col sm:flex-row gap-3"
   >
-    <input type="hidden" name="tag" value="steipete" />
+    <input type="hidden" name="path" value={Astro.url.pathname} />
     <input
       type="text"
       name="name"
@@ -41,6 +41,12 @@ const { variant = "default" } = Astro.props;
       Subscribe
     </button>
   </form>
+
+  <p
+    data-newsletter-message
+    class="text-sm mt-3 hidden text-gray-600 dark:text-gray-400"
+    aria-live="polite"
+  />
   
   {variant === 'default' && (
     <p class="text-xs text-gray-500 dark:text-gray-400 mt-3">
@@ -49,7 +55,98 @@ const { variant = "default" } = Astro.props;
   )}
 </div>
 
+<script is:inline>
+  (() => {
+    const forms = document.querySelectorAll("form[data-newsletter-form]");
+    for (const form of forms) {
+      const messageEl = form.parentElement?.querySelector("[data-newsletter-message]");
+      const submitButton = form.querySelector("button[type='submit']");
+      if (!(form instanceof HTMLFormElement) || !(messageEl instanceof HTMLElement) || !(submitButton instanceof HTMLButtonElement)) continue;
+
+      const setMessage = (text, tone) => {
+        messageEl.textContent = text;
+        messageEl.dataset.tone = tone;
+        messageEl.classList.remove("hidden");
+      };
+
+      const url = new URL(window.location.href);
+      const subscribed = url.searchParams.get("subscribed");
+      const subscribeError = url.searchParams.get("subscribe_error");
+      if (subscribed === "1") {
+        setMessage("You’re subscribed. Check your inbox for a confirmation email.", "success");
+        url.searchParams.delete("subscribed");
+        history.replaceState({}, "", url.toString());
+      } else if (subscribeError) {
+        const errorText =
+          subscribeError === "invalid_email"
+            ? "Please enter a valid email address."
+            : subscribeError === "db_not_configured"
+              ? "Subscription is temporarily unavailable. Please try again later."
+              : "Something went wrong. Please try again.";
+        setMessage(errorText, "error");
+        url.searchParams.delete("subscribe_error");
+        history.replaceState({}, "", url.toString());
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const email = formData.get("email");
+        const path = formData.get("path") || window.location.pathname;
+        if (typeof email !== "string" || email.trim().length < 3) {
+          setMessage("Please enter a valid email address.", "error");
+          return;
+        }
+
+        submitButton.disabled = true;
+        const originalText = submitButton.textContent || "Subscribe";
+        submitButton.textContent = "Subscribing...";
+        setMessage("Working…", "info");
+
+        try {
+          const res = await fetch("/api/subscribe", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              accept: "application/json",
+            },
+            body: JSON.stringify({ email, path }),
+          });
+
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || data?.ok === false) {
+            setMessage(data?.error || "Something went wrong. Please try again.", "error");
+            return;
+          }
+
+          setMessage("You’re subscribed. Check your inbox for a confirmation email.", "success");
+          form.reset();
+        } catch {
+          setMessage("Network error. Please try again.", "error");
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = originalText;
+        }
+      });
+    }
+  })();
+</script>
+
 <style>
+  [data-newsletter-message][data-tone="success"] {
+    color: rgb(21 128 61); /* roughly tailwind text-green-700 */
+  }
+  .dark [data-newsletter-message][data-tone="success"] {
+    color: rgb(134 239 172); /* roughly tailwind text-green-300 */
+  }
+  [data-newsletter-message][data-tone="error"] {
+    color: rgb(185 28 28); /* roughly tailwind text-red-700 */
+  }
+  .dark [data-newsletter-message][data-tone="error"] {
+    color: rgb(252 165 165); /* roughly tailwind text-red-300 */
+  }
+
   @media (max-width: 640px) {
     .newsletter-box {
       margin-left: -1rem;

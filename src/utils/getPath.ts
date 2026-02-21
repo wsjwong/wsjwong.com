@@ -4,7 +4,7 @@ import { slugifyStr } from "./slugify";
 /**
  * Get path of a blog post.
  *
- * - includeBase=true  => returns a site-absolute href (GitHub Pages base-path aware), e.g. /wsjwong.com/posts/2025/my-post
+ * - includeBase=true  => returns a site-absolute href (BASE_URL aware), e.g. /posts/2025/my-post
  * - includeBase=false => returns the slug path (no leading slash), e.g. 2025/my-post
  */
 export function getPath(id: string, filePath: string | undefined, includeBase = true) {

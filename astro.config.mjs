@@ -13,8 +13,6 @@ import AstroPWA from "@vite-pwa/astro";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
-  // GitHub Pages project site base path
-  base: "/wsjwong.com",
   trailingSlash: "never",
   markdown: {
     remarkPlugins: [
@@ -110,9 +108,8 @@ export default defineConfig({
         background_color: "#fdfdfd",
         display: "standalone",
         orientation: "portrait",
-        // GitHub Pages project site
-        scope: "/wsjwong.com/",
-        start_url: "/wsjwong.com/",
+        scope: "/",
+        start_url: "/",
         icons: [
           {
             src: "favicon.ico",

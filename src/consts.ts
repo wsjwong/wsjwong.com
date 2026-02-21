@@ -30,12 +30,10 @@ interface Site {
 }
 
 // Site configuration
-// Note: this repo is configured for GitHub Pages *project site* deployment under:
-// https://wsjwong.github.io/wsjwong.com/
 export const SITE: Site = {
-  website: "https://wsjwong.github.io/wsjwong.com/",
+  website: "https://wsjwong.com/",
   author: "Joe Wong",
-  profile: "https://wsjwong.github.io/wsjwong.com/about",
+  profile: "https://wsjwong.com/about",
   desc: "Building products, sharing notes, and shipping in public.",
   title: "Joe Wong",
   // Kept filename for theme compatibility (we overwrite the image asset)
