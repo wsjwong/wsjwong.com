@@ -5,7 +5,9 @@ import "@/styles/global.css";
 import Analytics from "@/components/Analytics.astro";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
-const baseUrl = import.meta.env.BASE_URL;
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 export interface Props {
   title?: string;
@@ -24,7 +26,8 @@ const {
   author = SITE.author,
   profile = SITE.profile,
   description = SITE.desc,
-  ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
+  // IMPORTANT: GitHub Pages project site needs BASE_URL prefix
+  ogImage = SITE.ogImage ? `${baseUrl}${SITE.ogImage}` : `${baseUrl}og.png`,
   canonicalURL = new URL(Astro.url.pathname, Astro.url),
   pubDatetime,
   modDatetime,
@@ -33,13 +36,11 @@ const {
 
 const socialImageURL = new URL(ogImage, Astro.url);
 
-const structuredData = {
+const structuredData: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: `${title}`,
   image: `${socialImageURL}`,
-  datePublished: `${pubDatetime?.toISOString()}`,
-  ...(modDatetime && { dateModified: modDatetime.toISOString() }),
   author: [
     {
       "@type": "Person",
@@ -48,10 +49,18 @@ const structuredData = {
     },
   ],
 };
+
+if (pubDatetime) {
+  structuredData.datePublished = pubDatetime.toISOString();
+}
+
+if (modDatetime) {
+  structuredData.dateModified = modDatetime.toISOString();
+}
 ---
 
 <!doctype html>
-<html lang=`${SITE.lang ?? "en"}` class={`${scrollSmooth && "scroll-smooth"}`}>
+<html lang={SITE.lang ?? "en"} class={scrollSmooth ? "scroll-smooth" : undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -114,7 +123,17 @@ const structuredData = {
       href={`${SITE.website}rss.xml`}
     />
 
-    <meta name="theme-color" content="" />
+    <!-- Theme colors (match wsjwong.com palette) -->
+    <meta
+      name="theme-color"
+      content="#2337ff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#000d8a"
+      media="(prefers-color-scheme: dark)"
+    />
 
     {
       // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
@@ -131,9 +150,13 @@ const structuredData = {
     <ViewTransitions />
 
     <script is:inline src={`${baseUrl}toggle-theme.js`}></script>
-    
+
     <!-- Twitter Widget Script -->
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
   </head>
   <body>
     <slot />

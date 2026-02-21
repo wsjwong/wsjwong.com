@@ -10,7 +10,9 @@ interface Props {
   canonicalURL?: URL;
 }
 
-const baseUrl = import.meta.env.BASE_URL;
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 const {
   title = SITE.title,
@@ -41,7 +43,7 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="wsjwong" />
 <meta name="application-name" content={SITE.title} />
-<meta name="msapplication-TileColor" content="#006cac" />
+<meta name="msapplication-TileColor" content="#2337ff" />
 
 <!-- Primary Meta Tags -->
 <title>{fullTitle}</title>
@@ -49,8 +51,8 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
 <meta name="description" content={description} />
 
 <!-- Theme Color -->
-<meta name="theme-color" content="#006cac" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#ff6b01" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#2337ff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#000d8a" media="(prefers-color-scheme: dark)" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
@@ -96,6 +98,8 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const theme = storedTheme || (prefersDark ? "dark" : "light");
 
+  // Keep both `data-theme` (used by this theme) and `.dark` (legacy/critical CSS)
+  document.documentElement.setAttribute("data-theme", theme);
   if (theme === "dark") {
     document.documentElement.classList.add("dark");
   } else {
@@ -107,6 +111,8 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (e) => {
+        const nextTheme = e.matches ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", nextTheme);
         if (e.matches) {
           document.documentElement.classList.add("dark");
         } else {
