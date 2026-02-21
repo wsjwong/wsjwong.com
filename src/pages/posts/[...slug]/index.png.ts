@@ -2,6 +2,7 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import type { APIRoute } from "astro";
 import { SITE } from "@/config";
 import { generateOgImageForPost } from "@/utils/generateOgImages";
+import { getPath } from "@/utils/getPath";
 
 export async function getStaticPaths() {
   if (!SITE.dynamicOgImage) {
@@ -13,7 +14,7 @@ export async function getStaticPaths() {
   );
 
   return posts.map((post) => ({
-    params: { slug: post.id },
+    params: { slug: getPath(post.id, post.filePath, false) },
     props: post,
   }));
 }

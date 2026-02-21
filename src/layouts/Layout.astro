@@ -5,9 +5,6 @@ import "@/styles/global.css";
 import Analytics from "@/components/Analytics.astro";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
-const baseUrl = import.meta.env.BASE_URL.endsWith("/")
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
 
 export interface Props {
   title?: string;
@@ -26,8 +23,7 @@ const {
   author = SITE.author,
   profile = SITE.profile,
   description = SITE.desc,
-  // IMPORTANT: GitHub Pages project site needs BASE_URL prefix
-  ogImage = SITE.ogImage ? `${baseUrl}${SITE.ogImage}` : `${baseUrl}og.png`,
+  ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
   canonicalURL = new URL(Astro.url.pathname, Astro.url),
   pubDatetime,
   modDatetime,
@@ -36,11 +32,13 @@ const {
 
 const socialImageURL = new URL(ogImage, Astro.url);
 
-const structuredData: Record<string, unknown> = {
+const structuredData = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: `${title}`,
   image: `${socialImageURL}`,
+  datePublished: `${pubDatetime?.toISOString()}`,
+  ...(modDatetime && { dateModified: modDatetime.toISOString() }),
   author: [
     {
       "@type": "Person",
@@ -49,23 +47,15 @@ const structuredData: Record<string, unknown> = {
     },
   ],
 };
-
-if (pubDatetime) {
-  structuredData.datePublished = pubDatetime.toISOString();
-}
-
-if (modDatetime) {
-  structuredData.dateModified = modDatetime.toISOString();
-}
 ---
 
 <!doctype html>
-<html lang={SITE.lang ?? "en"} class={scrollSmooth ? "scroll-smooth" : undefined}>
+<html lang=`${SITE.lang ?? "en"}` class={`${scrollSmooth && "scroll-smooth"}`}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="view-transition" content="same-origin" />
-    <link rel="icon" type="image/x-icon" href={`${baseUrl}favicon.ico`} />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
@@ -74,7 +64,7 @@ if (modDatetime) {
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
-    <link rel="sitemap" href={`${baseUrl}sitemap-index.xml`} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={title} />
@@ -123,17 +113,7 @@ if (modDatetime) {
       href={`${SITE.website}rss.xml`}
     />
 
-    <!-- Theme colors (match wsjwong.com palette) -->
-    <meta
-      name="theme-color"
-      content="#2337ff"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#000d8a"
-      media="(prefers-color-scheme: dark)"
-    />
+    <meta name="theme-color" content="" />
 
     {
       // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
@@ -149,14 +129,21 @@ if (modDatetime) {
 
     <ViewTransitions />
 
-    <script is:inline src={`${baseUrl}toggle-theme.js`}></script>
-
+    <script is:inline src="/toggle-theme.js"></script>
+    
+    <!-- Domain-based markdown redirect -->
+    <script is:inline>
+      // Check if we're on steipete.md domain
+      const hostname = window.location.hostname;
+      if ((hostname === 'steipete.md' || hostname === 'www.steipete.md') && !window.location.pathname.endsWith('.md')) {
+        // Redirect to the .md version of the current page
+        const mdPath = window.location.pathname === '/' ? '/index.md' : window.location.pathname + '.md';
+        window.location.replace(mdPath + window.location.search + window.location.hash);
+      }
+    </script>
+    
     <!-- Twitter Widget Script -->
-    <script
-      async
-      src="https://platform.twitter.com/widgets.js"
-      charset="utf-8"
-    ></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </head>
   <body>
     <slot />

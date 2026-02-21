@@ -44,22 +44,20 @@ export const criticalCSS = `
     height: auto;
   }
   
-  /* Theme critical styles (match wsjwong.com palette) */
+  /* Dark mode critical styles */
   :root {
-    --background: 255 255 255;
-    --foreground: 34 41 57;
-    --muted: 229 233 240;
-    --accent: 35 55 255;
-    --accent-dark: 0 13 138;
+    --background: 253 253 253;
+    --foreground: 17 24 35;
+    --muted: 246 246 246;
+    --accent: 0 108 172;
+    --accent-dark: 255 107 1;
   }
   
-  .dark,
-  [data-theme="dark"] {
-    --background: 15 18 25;
-    --foreground: 229 233 240;
-    --muted: 34 41 57;
-    --accent: 35 55 255;
-    --accent-dark: 0 13 138;
+  .dark {
+    --background: 18 24 27;
+    --foreground: 253 253 253;
+    --muted: 30 41 49;
+    --accent: 255 107 1;
   }
   
   /* Critical color classes */

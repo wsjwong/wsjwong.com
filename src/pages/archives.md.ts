@@ -27,10 +27,10 @@ export const GET: APIRoute = async () => {
 
   for (const year of years) {
     const count = postsByYear[Number(year)].length;
-    markdownContent += `- [${year}](./posts.md#${year}) (${count} post${count !== 1 ? "s" : ""})\n`;
+    markdownContent += `- [${year}](/posts.md#${year}) (${count} post${count !== 1 ? "s" : ""})\n`;
   }
 
-  markdownContent += `\n---\n\n[Back to Home](./index.md) | [All Posts](./posts.md)`;
+  markdownContent += `\n---\n\n[Back to Home](/index.md) | [All Posts](/posts.md)`;
 
   return new Response(markdownContent, {
     status: 200,
