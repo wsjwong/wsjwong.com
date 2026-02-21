@@ -1,10 +1,10 @@
-# Peter Steinberger's Personal Website
+# Joe Wong's Personal Website
 
-This is the source code for my personal website, built with [Astro](https://astro.build) and deployed on [Vercel](https://vercel.com).
+This is the source code for my personal website ([wsjwong.com](https://wsjwong.com)), built with [Astro](https://astro.build) and deployed on [Cloudflare Pages](https://pages.cloudflare.com).
 
 ## About
 
-I'm Peter Steinberger, an iOS developer, entrepreneur, and open source contributor. This website hosts my personal blog and information about my work.
+I'm Joe Wong (@wsjwong). This website hosts my personal blog and updates on products I'm building.
 
 ## Project Structure
 
@@ -40,7 +40,7 @@ I'm Peter Steinberger, an iOS developer, entrepreneur, and open source contribut
 
 ## Deployment
 
-This site is set up for easy deployment on Vercel. Just connect your GitHub repository to Vercel, and it will automatically build and deploy the site when changes are pushed.
+This site is deployed on Cloudflare Pages from the `wsjwong/wsjwong.com` repository. Pushes to `main` trigger production deployment.
 
 ## Newsletter subscription
 
