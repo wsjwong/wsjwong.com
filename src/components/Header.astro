@@ -19,9 +19,8 @@ const withBase = (path: string) => `${basePath}${path.startsWith("/") ? path : `
 const strippedPath = pathname.startsWith(basePath)
   ? pathname.slice(basePath.length) || "/"
   : pathname;
-const currentPath = strippedPath.endsWith("/") && strippedPath !== "/"
-  ? strippedPath.slice(0, -1)
-  : strippedPath;
+const currentPath =
+  strippedPath.endsWith("/") && strippedPath !== "/" ? strippedPath.slice(0, -1) : strippedPath;
 
 const isActive = (path: string) => {
   const currentPathArray = currentPath.split("/").filter((p) => p.trim());
