@@ -20,11 +20,15 @@ From January to September 2025, here’s what actually happened:
 - $0 revenue generated
 - $261 spent on the programme fees
 
+![Affiliate activity by month](/blog-images/affiliate-monthly-summary.png)
+
 That’s nine months of running the programme, paying for the software, inviting affiliates, and waiting for results. The outcome was clear: it didn’t work.
 
 ## What It Cost
 
 I used Rewardful’s Starter plan.
+
+![Rewardful subscription cost (Starter $49/mo)](/blog-images/rewardful-subscription.png)
 
 Even though the monthly fee isn’t huge, it adds up when the programme doesn’t produce any results. Across the period, I spent $261 and made $0 back.
 
@@ -34,6 +38,8 @@ Looking back, there are a two reasons:
 
 - No active recruitment. I didn’t reach out to creators, bloggers, or communities in my niche. I simply opened the programme and assumed people would promote it. They didn’t.
 - Mismatch with product stage. Affiliates make sense when you already have traction and partners who want to monetise their audience. For a small SaaS, it’s not the best growth channel yet.
+
+![Rewardful homepage — where I set things up](/blog-images/rewardful-homepage.png)
 
 ## What I Learned
 

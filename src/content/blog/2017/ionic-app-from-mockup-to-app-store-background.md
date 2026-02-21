@@ -8,6 +8,10 @@ draft: false
 
 I am writing down my journey of building a personal saving app with Ionic. This is what it looks like today.
 
+![App Screenshot 1](/blog-images/ionic-app-screenshot1.jpeg)
+
+![App Screenshot 2](/blog-images/ionic-app-screenshot2.jpeg)
+
 ## Why building one myself?
 
 All the way back to April 2017, I was inputing my assets and liabilities (a.k.a. balance) into excel. I had been doing it once a month for 2 years to keep track of my monthly saving. But…
@@ -32,6 +36,8 @@ First, I need to pick a technology. Below are my requirements:
 As a amateur in development, Ionic and React Native seems to be efficient ways. They are both cross-platform tools with high reputation. React is better in terms of performance, but I eventually pick Ionic simply because I understand its docs more.
 
 ## Mock-up
+
+![App Mockup](/blog-images/ionic-app-mockup.jpeg)
 
 Yes, the mess above is the only mock-up I draw for the project. A navigation bar at the top, following by a line chart, and a list of balance, finally the tab navigation. It might be difficult for others to read, but it is good enough for me to visualize my idea.
 

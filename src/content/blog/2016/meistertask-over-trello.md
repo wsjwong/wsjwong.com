@@ -12,7 +12,11 @@ I have been evaluating [Trello](https://trello.com) and [MeisterTask](https://ww
 
 After the trial, I found that I desperately need the feature of “mark completed” from MeisterTask while keeping my due date information.
 
+![MeisterTask: Mark Tasks as Completed](/blog-images/meistertask-completed.jpeg)
+
 In Trello, I cannot mark the task as completed. It always reminds me with a due date alert in its interface even I have put those completed tasks under the “completed” column.
+
+![Trello: Due Date Alert](/blog-images/trello-due-date.jpeg)
 
 I can only remove the alert by removing my due date. My due date information will be gone.
 
