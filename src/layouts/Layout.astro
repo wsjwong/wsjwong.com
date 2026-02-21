@@ -5,6 +5,10 @@ import "@/styles/global.css";
 import Analytics from "@/components/Analytics.astro";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const withBase = (path: string) => `${baseUrl}${path.replace(/^\//, "")}`;
 
 export interface Props {
   title?: string;
@@ -23,14 +27,19 @@ const {
   author = SITE.author,
   profile = SITE.profile,
   description = SITE.desc,
-  ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
+  ogImage = SITE.ogImage || "og.png",
   canonicalURL = new URL(Astro.url.pathname, Astro.url),
   pubDatetime,
   modDatetime,
   scrollSmooth = false,
 } = Astro.props;
 
-const socialImageURL = new URL(ogImage, Astro.url);
+const resolvedOgImage = /^https?:\/\//.test(ogImage)
+  ? ogImage
+  : ogImage.startsWith(baseUrl)
+    ? ogImage
+    : withBase(ogImage);
+const socialImageURL = new URL(resolvedOgImage, Astro.url);
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -55,7 +64,7 @@ const structuredData = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="view-transition" content="same-origin" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href={withBase("favicon.ico")} />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
@@ -64,7 +73,7 @@ const structuredData = {
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href={withBase("sitemap-index.xml")} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={title} />
@@ -129,7 +138,7 @@ const structuredData = {
 
     <ViewTransitions />
 
-    <script is:inline src="/toggle-theme.js"></script>
+    <script is:inline src={withBase("toggle-theme.js")}></script>
     
     <!-- Domain-based markdown redirect -->
     <script is:inline>
