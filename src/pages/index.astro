@@ -13,54 +13,49 @@ import { SITE, SOCIALS } from "@/config";
 import Layout from "@/layouts/Layout.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 
-const posts = await getCollection("blog");
+const baseUrl = import.meta.env.BASE_URL;
 
+const posts = await getCollection("blog");
 const sortedPosts = getSortedPosts(posts);
-const posts2025AndLater = sortedPosts.filter(({ data }) => data.pubDatetime.getFullYear() >= 2025);
-const featuredPosts = posts2025AndLater.filter(({ data }) => data.featured);
-const recentPosts = posts2025AndLater.filter(({ data }) => !data.featured);
+
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 ---
 
-<Layout description="Peter Steinberger: AI-powered tools from Swift roots to web frontiers. Every commit lands on GitHub for you to fork & remix.">
+<Layout description={SITE.desc}>
   <StructuredData type="WebSite" data={{}} />
   <StructuredData type="Person" data={{}} />
   <Header />
   <main id="main-content" data-layout="index">
     <section id="hero" class="pt-6 pb-4">
       <div class="flex flex-col sm:flex-row items-start gap-4">
-        <a href="/about" class="block mx-auto sm:mx-0 group">
-          <img 
-            src="/peter-avatar.jpg" 
-            alt="Peter Steinberger" 
+        <a href={`${baseUrl}about`} class="block mx-auto sm:mx-0 group">
+          <img
+            src={`${baseUrl}peter-avatar.jpg`}
+            alt="Joe Wong"
             class="w-40 h-40 rounded-full object-cover flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl"
           />
         </a>
         <div class="flex-1 text-center sm:text-left">
           <div class="flex items-center gap-2 justify-center sm:justify-start">
             <h1 class="my-2 inline-block text-2xl font-bold sm:my-4 sm:text-3xl">
-              Hi, I'm @steipete.
+              Joe Wong (@wsjwong)
             </h1>
             <a
               target="_blank"
-              href="/rss.xml"
+              href={`${baseUrl}rss.xml`}
               class="inline-block"
               aria-label="rss feed"
               title="RSS Feed"
             >
-              <IconRss
-                width={20}
-                height={20}
-                class="scale-125 stroke-accent stroke-3"
-              />
+              <IconRss width={20} height={20} class="scale-125 stroke-accent stroke-3" />
               <span class="sr-only">RSS Feed</span>
             </a>
           </div>
           <p>
-            AI-powered tools from Swift roots to web frontiers.<br />
-            Every commit lands on GitHub for you to fork & remix.
+            Building products, sharing notes, and shipping in public.
           </p>
           {
-            // only display if at least one social link is enabled
             SOCIALS.filter((social) => social.active).length > 0 && (
               <div class="mt-4 flex flex-row items-center justify-center sm:justify-start">
                 <Socials />
@@ -73,37 +68,75 @@ const recentPosts = posts2025AndLater.filter(({ data }) => !data.featured);
 
     <Hr />
 
-    {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured" class="pt-12 pb-6">
-            <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
-            <ul>
-              {featuredPosts.map((data) => (
-                <Card variant="h3" {...data} showImage={false} />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
-      )
-    }
+    <section id="timeline" class="pt-8 pb-6">
+      <h2 class="text-2xl font-semibold tracking-wide">Now</h2>
+      <ul class="mt-4 space-y-4">
+        <li class="rounded-lg bg-secondary/40 p-4">
+          <div class="text-sm opacity-75">18 Sep 2025</div>
+          <div>
+            Launched <a class="text-accent underline" href="https://professionalportrait.ai/?utm_source=wsjwong.com" target="_blank" rel="noopener noreferrer">Portrait AI for Professionals</a> to create a stunning portrait from a selfie.
+          </div>
+        </li>
+        <li class="rounded-lg bg-secondary/40 p-4">
+          <div class="text-sm opacity-75">16 Feb 2024</div>
+          <div>
+            Launched <a class="text-accent underline" href="https://simplemetrics.xyz?utm_source=wsjwong.com" target="_blank" rel="noopener noreferrer">AI for Sheets</a> to automate AI in Google Sheets.
+            <div class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+              <span><strong>2,220,000</strong> Downloads</span>
+              <span><strong>4.9</strong> Rating</span>
+            </div>
+          </div>
+        </li>
+        <li class="rounded-lg bg-secondary/40 p-4">
+          <div class="text-sm opacity-75">Apr 2022 – Nov 2023</div>
+          <div>
+            Wrote on Instagram <a class="text-accent underline" href="https://instagram.com/joe.invest" target="_blank" rel="noopener noreferrer">@joe.invest</a> covering business in Chinese.
+            <div class="mt-2 text-sm"><strong>3,500</strong> Followers</div>
+          </div>
+        </li>
+        <li class="rounded-lg bg-secondary/40 p-4">
+          <div class="text-sm opacity-75">Jan 2021 – Nov 2022</div>
+          <div>
+            Hosted <a class="text-accent underline" href="https://www.youtube.com/playlist?list=PL34gII-hLXFiZzKGB1rmgrjpymoo1fcVD" target="_blank" rel="noopener noreferrer">ETF觀察室</a> podcast covering ETF investing in Cantonese.
+            <div class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+              <span><strong>67,942</strong> Total plays</span>
+              <span><strong>3,219</strong> Hours listened</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
+    <Hr />
+
+    {featuredPosts.length > 0 && (
+      <>
+        <section id="featured" class="pt-12 pb-6">
+          <h2 class="text-2xl font-semibold tracking-wide">Featured posts</h2>
           <ul>
-            {recentPosts.map(
-              (data, index) =>
-                index < SITE.postPerIndex && <Card variant="h3" {...data} showImage={false} />,
-            )}
+            {featuredPosts.map((data) => (
+              <Card variant="h3" {...data} showImage={false} />
+            ))}
           </ul>
         </section>
-      )
-    }
+        {recentPosts.length > 0 && <Hr />}
+      </>
+    )}
+
+    {recentPosts.length > 0 && (
+      <section id="recent-posts" class="pt-12 pb-6">
+        <h2 class="text-2xl font-semibold tracking-wide">Latest</h2>
+        <ul class="mt-4">
+          {recentPosts.map(
+            (data, index) =>
+              index < SITE.postPerIndex && <Card variant="h3" {...data} showImage={false} />,
+          )}
+        </ul>
+      </section>
+    )}
 
     <div class="my-8 text-center">
-      <LinkButton href="/posts/">
+      <LinkButton href={`${baseUrl}posts/`}>
         All Posts
         <IconArrowRight class="inline-block" />
       </LinkButton>
@@ -114,8 +147,7 @@ const recentPosts = posts2025AndLater.filter(({ data }) => !data.featured);
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
-      ?.dataset?.layout;
+    const indexLayout = document.querySelector("#main-content")?.dataset?.layout;
     if (indexLayout) {
       sessionStorage.setItem("backUrl", "/");
     }

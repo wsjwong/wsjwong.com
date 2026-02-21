@@ -13,6 +13,8 @@ import AstroPWA from "@vite-pwa/astro";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
+  // GitHub Pages project site base path
+  base: "/wsjwong.com",
   trailingSlash: "never",
   markdown: {
     remarkPlugins: [
@@ -101,15 +103,16 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "peter-avatar.jpg"],
       manifest: {
-        name: "Peter Steinberger",
-        short_name: "steipete",
-        description: "AI-powered tools from Swift roots to web frontiers. Everything I build is open source.",
+        name: "Joe Wong",
+        short_name: "wsjwong",
+        description: "Building products, sharing notes, and shipping in public.",
         theme_color: "#006cac",
         background_color: "#fdfdfd",
         display: "standalone",
         orientation: "portrait",
-        scope: "/",
-        start_url: "/",
+        // GitHub Pages project site
+        scope: "/wsjwong.com/",
+        start_url: "/wsjwong.com/",
         icons: [
           {
             src: "favicon.ico",

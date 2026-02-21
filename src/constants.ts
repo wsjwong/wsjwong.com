@@ -3,38 +3,24 @@ import { SITE } from "./consts";
 export const SOCIALS = [
   {
     name: "Github",
-    href: "https://github.com/steipete",
+    href: "https://github.com/wsjwong",
     linkTitle: ` ${SITE.title} on Github`,
     icon: "github",
     active: true,
   },
   {
-    name: "X",
-    href: "https://x.com/steipete",
-    linkTitle: `${SITE.title} on X`,
-    icon: "twitter",
-    active: true,
-  },
-  {
-    name: "BlueSky",
-    href: "https://bsky.app/profile/steipete.me",
-    linkTitle: `${SITE.title} on BlueSky`,
-    icon: "bluesky",
-    active: true,
-  },
-  {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/steipete/",
+    href: "https://www.linkedin.com/in/wsjwong/",
     linkTitle: `${SITE.title} on LinkedIn`,
     icon: "linkedin",
     active: true,
   },
   {
     name: "Mail",
-    href: "mailto:peter@steipete.me",
+    href: "mailto:hello@wsjwong.com",
     linkTitle: `Send an email to ${SITE.title}`,
     icon: "mail",
-    active: true,
+    active: false,
   },
 ] as const;
 
@@ -44,12 +30,6 @@ export const SHARE_LINKS = [
     href: "https://x.com/intent/post?url=",
     linkTitle: `Share this post on X`,
     icon: "twitter",
-  },
-  {
-    name: "BlueSky",
-    href: "https://bsky.app/intent/compose?text=",
-    linkTitle: `Share this post on BlueSky`,
-    icon: "bluesky",
   },
   {
     name: "LinkedIn",

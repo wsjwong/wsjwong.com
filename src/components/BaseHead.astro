@@ -10,10 +10,12 @@ interface Props {
   canonicalURL?: URL;
 }
 
+const baseUrl = import.meta.env.BASE_URL;
+
 const {
   title = SITE.title,
   description = SITE.desc,
-  image = "/images/og.png",
+  image = `${baseUrl}${SITE.ogImage}`,
   type = "website",
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
 } = Astro.props;
@@ -29,16 +31,16 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
 <meta name="author" content={SITE.author} />
 
 <!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" href="/peter-avatar.jpg" />
-<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="icon" type="image/x-icon" href={`${baseUrl}favicon.ico`} />
+<link rel="apple-touch-icon" href={`${baseUrl}${SITE.ogImage}`} />
+<link rel="manifest" href={`${baseUrl}manifest.webmanifest`} />
 
 <!-- PWA Meta Tags -->
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-<meta name="apple-mobile-web-app-title" content="steipete" />
-<meta name="application-name" content="Peter Steinberger" />
+<meta name="apple-mobile-web-app-title" content="wsjwong" />
+<meta name="application-name" content={SITE.title} />
 <meta name="msapplication-TileColor" content="#006cac" />
 
 <!-- Primary Meta Tags -->
@@ -47,16 +49,8 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
 <meta name="description" content={description} />
 
 <!-- Theme Color -->
-<meta
-  name="theme-color"
-  content="#006cac"
-  media="(prefers-color-scheme: light)"
-/>
-<meta
-  name="theme-color"
-  content="#ff6b01"
-  media="(prefers-color-scheme: dark)"
-/>
+<meta name="theme-color" content="#006cac" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#ff6b01" media="(prefers-color-scheme: dark)" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
@@ -68,8 +62,8 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@steipete" />
-<meta name="twitter:creator" content="@steipete" />
+<meta name="twitter:site" content="@wsjwong" />
+<meta name="twitter:creator" content="@wsjwong" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(image, Astro.site)} />
@@ -82,15 +76,15 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
   rel="alternate"
   type="application/rss+xml"
   title={`${SITE.title} | RSS Feed`}
-  href="/rss.xml"
+  href={`${baseUrl}rss.xml`}
 />
 
 <!-- Sitemap -->
-<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="sitemap" href={`${baseUrl}sitemap-index.xml`} />
 
 <!-- Font Preloading -->
-<link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
-<link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />
+<link rel="preload" href={`${baseUrl}fonts/atkinson-regular.woff`} as="font" type="font/woff" crossorigin />
+<link rel="preload" href={`${baseUrl}fonts/atkinson-bold.woff`} as="font" type="font/woff" crossorigin />
 
 <!-- Critical CSS -->
 <style is:inline set:html={criticalCSS}></style>

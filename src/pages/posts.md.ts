@@ -30,13 +30,13 @@ export const GET: APIRoute = async () => {
         month: "short",
         day: "numeric",
       });
-      markdownContent += `- ${date}: [${post.data.title}](/posts/${post.id}.md)\n`;
+      markdownContent += `- ${date}: [${post.data.title}](./posts/${post.id}.md)\n`;
     }
 
     markdownContent += "\n";
   }
 
-  markdownContent += `---\n\n[Back to Home](/index.md)`;
+  markdownContent += `---\n\n[Back to Home](./index.md)`;
 
   return new Response(markdownContent, {
     status: 200,
