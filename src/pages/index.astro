@@ -18,11 +18,8 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/")
   : `${import.meta.env.BASE_URL}/`;
 
 const posts = await getCollection("blog");
-
 const sortedPosts = getSortedPosts(posts);
-const posts2025AndLater = sortedPosts.filter(({ data }) => data.pubDatetime.getFullYear() >= 2025);
-const featuredPosts = posts2025AndLater.filter(({ data }) => data.featured);
-const recentPosts = posts2025AndLater.filter(({ data }) => !data.featured);
+const latestPosts = sortedPosts.slice(0, SITE.postPerIndex);
 ---
 
 <Layout description={SITE.desc}>
@@ -76,34 +73,16 @@ const recentPosts = posts2025AndLater.filter(({ data }) => !data.featured);
 
     <Hr />
 
-    {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured" class="pt-12 pb-6">
-            <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
-            <ul>
-              {featuredPosts.map((data) => (
-                <Card variant="h3" {...data} showImage={false} />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
-      )
-    }
-
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
-          <ul>
-            {recentPosts.map(
-              (data, index) =>
-                index < SITE.postPerIndex && <Card variant="h3" {...data} showImage={false} />,
-            )}
-          </ul>
-        </section>
-      )
-    }
+    {latestPosts.length > 0 && (
+      <section id="latest-posts" class="pt-12 pb-6">
+        <h2 class="text-2xl font-semibold tracking-wide">Latest</h2>
+        <ul class="mt-4">
+          {latestPosts.map((data) => (
+            <Card variant="h3" {...data} showImage={false} />
+          ))}
+        </ul>
+      </section>
+    )}
 
     <div class="my-8 text-center">
       <LinkButton href={`${baseUrl}posts/`}>
