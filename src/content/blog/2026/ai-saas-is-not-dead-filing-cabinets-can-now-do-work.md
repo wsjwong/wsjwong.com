@@ -1,176 +1,206 @@
 ---
-title: "AI SaaS Isn’t Dead. Filing Cabinets Can Now Do Work"
-description: "A simple way to think about the next wave of SaaS: not systems of record, but systems of process."
+title: "Clients Don’t Care If AI Can Code"
+description: "Most clients already know AI can code. What they care about is whether technology can actually help the business."
 pubDatetime: 2026-03-06T00:00:00Z
 tags: ["ai", "saas", "agents", "products"]
-featured: false
+featured: true
 draft: false
+heroImage: "/blog-images/clients-dont-care-if-ai-can-code.svg"
 source: "https://www.youtube.com/watch?v=0lzo2tFBFy8"
 ---
 
-I recently listened to the a16z podcast episode with Atlassian CEO Mike Cannon-Brookes, and one framing stuck with me:
+Lately, I’ve noticed something important in client conversations.
 
-> The whole history of software from 1960 until 2022 was turning filing cabinets into databases. Now the filing cabinet can do work.
+Almost all of them already know AI can code well now.
 
-That line explains why I think the “SaaS apocalypse” narrative is directionally wrong.
+That is no longer the interesting part.
 
-AI is not killing software. It is changing what software is expected to do.
+They don’t really care whether Claude, Cursor, or any other tool can build an app, write functions, or scaffold a dashboard. That has already become normalised.
+
+Their concern is still the same as before:
+
+- Can technology help my business?
+- Can it make a workflow faster?
+- Can it reduce back-and-forth?
+- Can it improve service quality?
+- Can it save my team time without adding more complexity?
+
+That is why I think a lot of AI discussion is still pointed at the wrong thing.
+
+The market is obsessed with whether AI can code.
+Buyers are still focused on whether software can help them operate better.
+
+Those are not the same question.
+
+## AI coding is impressive, but it is not the product
+
+AI coding is real. It matters. It changes how software gets built.
+
+But for most clients, that is not the value proposition.
+
+No one buys software because they are impressed that it was built quickly.
+They buy software because it helps them do a job better.
+
+This is why the a16z podcast conversation with Atlassian’s Mike Cannon-Brookes clicked for me. The most useful framing in that discussion was this:
+
+> The whole history of software was turning filing cabinets into databases. Now the filing cabinet can do work.
+
+That is the real shift.
+
+The old software model was about recording information.
+The new software model is about helping move work forward.
+
+## What clients actually want
+
+When I speak with clients, they are usually not asking:
+
+- Can AI generate code?
+- Can it build an app from a prompt?
+- Can it replace developers entirely?
+
+What they really want to know is:
+
+- Can this help my support team resolve issues faster?
+- Can this reduce manual ops work?
+- Can this speed up approvals and internal coordination?
+- Can this help my team produce more without hiring too fast?
+- Can this fit into the way we already work?
+
+That is a workflow question, not a model benchmark question.
+
+And that is why I think many AI products still feel more exciting on Twitter than in actual businesses.
+
+They demo well.
+But they are not yet clearly attached to a painful enough business problem.
 
 ## From systems of record to systems of process
 
-For decades, software mostly digitised information.
+For years, software mostly digitised information.
 
 - HR files became Workday
 - support tickets became Zendesk
 - accounting records became QuickBooks
 - CRM notes became Salesforce
 
-That was valuable, but it still left humans doing most of the work around the data. People fetched, read, interpreted, routed, approved, followed up, and executed.
+That was a huge step forward, but it still left humans doing most of the actual work around the data.
 
-AI changes that expectation.
+People still had to:
 
-The next generation of SaaS will not just store information. It will help move work forward. That means software becomes less of a passive system of record and more of an active system of process.
+- read the context
+- decide what mattered
+- route the task
+- follow up with another team
+- approve something
+- summarise the issue
+- move the process along
 
-That distinction matters.
+This is where AI starts to matter.
 
-A business is not just a pile of records. It is a collection of workflows:
+Not because it can write code, but because it can help software become a *system of process*, not just a *system of record*.
 
-- reviewing tickets
-- approving requests
-- checking compliance
-- onboarding staff
-- collecting payments
-- drafting documents
-- coordinating handoffs between teams
+That is much closer to how clients think.
 
-If AI can make those workflows faster, cheaper, and more reliable, then software becomes more important, not less.
+They do not wake up wanting a smarter database.
+They want fewer bottlenecks.
+They want less repetitive work.
+They want the business to move faster.
 
-## Why some SaaS companies are more exposed than others
+## Why I don’t buy the “SaaS is dead” take
 
-One of the best parts of the episode was the idea that public markets are lumping very different SaaS businesses together.
+I do think some SaaS products will get squeezed.
 
-That is a mistake.
+Especially the ones where the value is thin, the logic is shallow, and the pricing is mostly attached to human seats doing repetitive tasks.
 
-A rough way to think about it:
+But I don’t think serious business software disappears just because AI can generate interfaces and code.
 
-### 1. Seat-based software tied directly to labour output
+The reason is simple:
 
-These are products where the pricing model is tightly tied to how many humans are doing the work.
+Most business software is not just UI plus a database.
+It is years of accumulated workflow logic.
 
-Support software is the easiest example. If AI agents can handle a large share of support tasks, some companies may need fewer human seats.
+It contains the messy parts:
 
-That puts real pressure on traditional per-seat pricing.
-
-### 2. Software where seat pricing is just a fairness proxy
-
-Some products charge per employee or per user because it feels fair, not because every seat is directly producing work inside the app.
-
-That kind of system is often still very defensible, especially if it owns critical company data and embedded business rules.
-
-In fact, these systems may become more valuable because AI can sit on top of them and execute tasks using that data.
-
-### 3. Everything in between
-
-Some companies will be hit. Some will adapt. Some will get stronger.
-
-The important point is that “AI will kill SaaS” is far too simplistic. The real question is:
-
-> Does this product only record work, or can it become part of the workflow itself?
-
-## Why “everyone will just vibe code their own software” is overstated
-
-This is another idea I hear a lot, and I mostly don’t buy it.
-
-Yes, AI makes custom software much easier to build.
-
-But enterprise software is not just UI plus a database. It is years of hidden business logic, edge cases, governance rules, permissions, and operational scar tissue.
-
-You can vibe code a demo.
-
-It is much harder to recreate the logic for:
-
-- leave policies across regions
-- procurement rules
-- approval chains
-- audit requirements
-- tax edge cases
-- support escalations
+- approval rules
+- compliance steps
+- regional exceptions
+- handoff logic
 - finance controls
+- support escalation paths
+- permissioning
+- reporting requirements
 
-That accumulated process knowledge is often the real moat.
+That is the stuff clients actually depend on.
 
-So I don’t think most serious businesses will replace core systems casually.
+You can vibe code a demo in a weekend.
+You usually cannot replace years of embedded business logic and edge cases that easily.
 
-What I do think will happen is this:
+So my view is not that software gets replaced by prompts.
+It is that software gets re-rated based on how much real workflow value it owns.
 
-- companies will keep the core system
-- AI will make those systems more extensible
-- teams will build lightweight custom layers on top
-- the front-end experience will change much faster than the underlying source of truth
+## The hard part is not intelligence. It is trust.
 
-That is a very different outcome from “software gets replaced by prompts.”
+Another thing clients care about a lot more than the AI crowd sometimes admits: trust.
 
-## The real bottleneck is not model quality
+Even if the AI is capable, the business still has practical questions:
 
-Another line from the episode that I strongly agree with:
+- When should it act automatically?
+- When should it ask for approval?
+- How much should it show?
+- How do we know what it changed?
+- How do we stop it from becoming another layer of confusion?
 
-> The models are far ahead of the value they’re delivering.
+That is not a raw model problem.
+That is a product and workflow design problem.
 
-That sounds right.
+This is where I think a lot of the real value will be created.
 
-For many products, the limiting factor is no longer raw model capability. It is product design.
+Not by the teams that shout the loudest about autonomous agents.
+But by the teams that quietly design software people can actually trust inside a real business process.
 
-More specifically:
+## The best AI features may look boring
 
-- when should the agent ask for permission?
-- when should it just act?
-- how much reasoning should it show?
-- how do users know what happened?
-- how do you build trust without creating friction?
+I also think the most valuable AI features, at least in the near term, may look quite boring.
 
-This is the part a lot of AI products still get wrong.
+For example:
 
-A powerful model inside a bad workflow is still a bad product.
+- summarising a long support ticket properly
+- drafting a follow-up based on internal context
+- routing a request to the right team
+- highlighting risk before approval
+- preparing a clean brief before a meeting
 
-If an agent asks too many questions, it becomes annoying.
-If it asks too few, users don’t trust it.
-If it shows every step, it becomes noisy.
-If it hides everything, it feels magical in the wrong way.
+These are not flashy demo moments.
+But they are exactly the kind of things clients care about, because they save time in places where teams already feel pain.
 
-That is why I think the next real moat is not just AI capability. It is human-agent loop design.
+That is why I think many successful AI products will win first as workflow assists, not magical all-in-one agents.
 
-## The most useful AI features may look boring
+## My current takeaway
 
-This was another insight I liked.
+My biggest takeaway right now is this:
 
-The most successful near-term AI features may not be the flashy ones. They may just be the ones that fit naturally into existing workflows.
+AI coding has already become table stakes in people’s minds.
+It is impressive, but it is not the main business question anymore.
 
-A good example is ticket summarisation.
+The real question is still the old one:
 
-If a support or IT ticket already has long context, attachments, history, and multiple participants, then a concise and accurate summary is incredibly valuable. It saves real time immediately.
+> How does this technology help the business?
 
-That is not a sexy demo.
-It may not even look very “agentic.”
-But it solves a real problem inside a real workflow.
+That is the filter I increasingly use now.
 
-And that is usually where adoption starts.
+Not:
+- how magical is the demo?
+- how good is the code generation?
+- how many agents are involved?
 
-## My takeaway
+But:
+- does it solve a real workflow problem?
+- does it fit how a team actually works?
+- does it reduce effort, delay, or confusion?
+- does the buyer understand the value quickly?
 
-I think the right way to think about AI SaaS is:
+If the answer is yes, then AI makes the software more valuable.
+If the answer is no, then it is probably still just a good demo.
 
-- the old version stored information
-- the new version helps execute work
-- the winning products will combine data, process logic, and trustable UX
+That is why I don’t think AI kills SaaS.
 
-So no, I don’t think SaaS is dead.
-
-I think weak SaaS will struggle.
-I think generic SaaS will get compressed.
-I think seat-based pricing will face pressure in some categories.
-
-But software that owns real workflow, real context, and real business logic may become even more valuable.
-
-The filing cabinet doesn’t just hold records anymore.
-
-It can do work.
+I think it forces SaaS to grow up.
