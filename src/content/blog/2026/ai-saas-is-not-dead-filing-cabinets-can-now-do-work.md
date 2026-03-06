@@ -5,7 +5,6 @@ pubDatetime: 2026-03-06T00:00:00Z
 tags: ["ai", "saas", "agents", "products"]
 featured: true
 draft: false
-heroImage: "/blog-images/clients-dont-care-if-ai-can-code.svg"
 source: "https://www.youtube.com/watch?v=0lzo2tFBFy8"
 ---
 
