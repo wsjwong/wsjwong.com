@@ -99,10 +99,17 @@ export default defineConfig({
     react(),
     AstroPWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "peter-avatar.jpg"],
+      includeAssets: [
+        "favicon.ico",
+        "favicon.svg",
+        "apple-touch-icon.png",
+        "favicon-192.png",
+        "favicon-512.png",
+        "peter-avatar.jpg",
+      ],
       manifest: {
         name: "Joe Wong",
-        short_name: "wsjwong",
+        short_name: "WS",
         description: "Building products, sharing notes, and shipping in public.",
         theme_color: "#006cac",
         background_color: "#fdfdfd",
@@ -112,20 +119,20 @@ export default defineConfig({
         start_url: "/",
         icons: [
           {
-            src: "favicon.ico",
-            sizes: "48x48",
-            type: "image/x-icon",
+            src: "favicon-192.png",
+            sizes: "192x192",
+            type: "image/png",
           },
           {
-            src: "peter-avatar.jpg",
-            sizes: "192x192",
-            type: "image/jpeg",
+            src: "favicon-512.png",
+            sizes: "512x512",
+            type: "image/png",
             purpose: "any",
           },
           {
-            src: "peter-avatar.jpg",
+            src: "favicon-512.png",
             sizes: "512x512",
-            type: "image/jpeg",
+            type: "image/png",
             purpose: "any maskable",
           },
         ],
