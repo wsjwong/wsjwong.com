@@ -40,8 +40,8 @@ I'm Joe Wong (@wsjwong). This website hosts my personal blog and updates on prod
 
 ## Deployment
 
-This site deploys to the Cloudflare Pages project `wsjwong-com`.
-Pushes to `main` in `wsjwong/wsjwong.com` trigger the GitHub Actions workflow in [.github/workflows/cloudflare-pages.yml](.github/workflows/cloudflare-pages.yml), which builds the site and deploys `dist/` to production.
+This site deploys to the Cloudflare Pages project `wsjwong`.
+Pushes to `main` in `wsjwong/wsjwong.com` deploy through Cloudflare Pages' Git integration.
 
 ## Newsletter subscription
 
