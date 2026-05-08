@@ -41,12 +41,12 @@ const resolvedOgImage = /^https?:\/\//.test(ogImage)
     : withBase(ogImage);
 const socialImageURL = new URL(resolvedOgImage, Astro.url);
 
-const structuredData = {
+const structuredData: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: `${title}`,
   image: `${socialImageURL}`,
-  datePublished: `${pubDatetime?.toISOString()}`,
+  ...(pubDatetime && { datePublished: pubDatetime.toISOString() }),
   ...(modDatetime && { dateModified: modDatetime.toISOString() }),
   author: [
     {
@@ -59,7 +59,7 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang=`${SITE.lang ?? "en"}` class={`${scrollSmooth && "scroll-smooth"}`}>
+<html lang={SITE.lang ?? "en"} class={scrollSmooth ? "scroll-smooth" : undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -125,8 +125,8 @@ const structuredData = {
       href={`${SITE.website}rss.xml`}
     />
 
-    <meta name="theme-color" content="#006cac" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#ff6b01" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#2337ff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f1219" media="(prefers-color-scheme: dark)" />
 
     {
       // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
@@ -143,18 +143,7 @@ const structuredData = {
     <ViewTransitions />
 
     <script is:inline src={withBase("toggle-theme.js")}></script>
-    
-    <!-- Domain-based markdown redirect -->
-    <script is:inline>
-      // Check if we're on steipete.md domain
-      const hostname = window.location.hostname;
-      if ((hostname === 'steipete.md' || hostname === 'www.steipete.md') && !window.location.pathname.endsWith('.md')) {
-        // Redirect to the .md version of the current page
-        const mdPath = window.location.pathname === '/' ? '/index.md' : window.location.pathname + '.md';
-        window.location.replace(mdPath + window.location.search + window.location.hash);
-      }
-    </script>
-    
+
     <!-- Twitter Widget Script -->
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </head>

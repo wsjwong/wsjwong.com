@@ -31,8 +31,8 @@ function getPreferredTheme() {
     return currentTheme;
   }
 
-  // Default to dark theme (Peter-like default)
-  return "dark";
+  // Otherwise, follow system preference
+  return getSystemTheme();
 }
 
 let themeValue = getPreferredTheme();

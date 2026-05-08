@@ -45,7 +45,7 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Joe Wong" />
 <meta name="application-name" content="Joe Wong" />
-<meta name="msapplication-TileColor" content="#006cac" />
+<meta name="msapplication-TileColor" content="#2337ff" />
 
 <!-- Primary Meta Tags -->
 <title>{fullTitle}</title>
@@ -55,12 +55,12 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
 <!-- Theme Color -->
 <meta
   name="theme-color"
-  content="#006cac"
+  content="#2337ff"
   media="(prefers-color-scheme: light)"
 />
 <meta
   name="theme-color"
-  content="#ff6b01"
+  content="#0f1219"
   media="(prefers-color-scheme: dark)"
 />
 
@@ -74,8 +74,8 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@steipete" />
-<meta name="twitter:creator" content="@steipete" />
+<meta name="twitter:site" content="@wsjwong" />
+<meta name="twitter:creator" content="@wsjwong" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(image, Astro.site)} />
@@ -94,10 +94,6 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
 <!-- Sitemap -->
 <link rel="sitemap" href={withBase("sitemap-index.xml")} />
 
-<!-- Font Preloading -->
-<link rel="preload" href={withBase("fonts/atkinson-regular.woff")} as="font" type="font/woff" crossorigin />
-<link rel="preload" href={withBase("fonts/atkinson-bold.woff")} as="font" type="font/woff" crossorigin />
-
 <!-- Critical CSS -->
 <style is:inline set:html={criticalCSS}></style>
 
@@ -106,7 +102,7 @@ const criticalCSS = getPageCriticalCSS(Astro.url.pathname);
   // Check localStorage first, then fallback to system preferences
   const storedTheme = localStorage.getItem("theme");
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = storedTheme || (prefersDark ? "dark" : "dark");
+  const theme = storedTheme || (prefersDark ? "dark" : "light");
 
   document.documentElement.setAttribute("data-theme", theme);
   if (theme === "dark") {

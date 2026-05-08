@@ -44,20 +44,25 @@ export const criticalCSS = `
     height: auto;
   }
   
-  /* Dark mode critical styles */
-  :root {
-    --background: 253 253 253;
-    --foreground: 17 24 35;
-    --muted: 246 246 246;
-    --accent: 0 108 172;
-    --accent-dark: 255 107 1;
+  /* Theme critical styles (match wsjwong.com palette) */
+  :root,
+  html[data-theme="light"] {
+    --background: 255 255 255;
+    --foreground: 34 41 57;
+    --muted: 229 233 240;
+    --secondary: 229 233 240;
+    --accent: 35 55 255;
+    --accent-dark: 0 13 138;
   }
   
-  .dark {
-    --background: 18 24 27;
-    --foreground: 253 253 253;
-    --muted: 30 41 49;
-    --accent: 255 107 1;
+  .dark,
+  html[data-theme="dark"] {
+    --background: 15 18 25;
+    --foreground: 229 233 240;
+    --muted: 34 41 57;
+    --secondary: 34 41 57;
+    --accent: 125 143 255;
+    --accent-dark: 35 55 255;
   }
   
   /* Critical color classes */
@@ -108,25 +113,8 @@ export const criticalCSS = `
     padding: 1rem;
   }
   
-  /* Font loading optimization */
-  @font-face {
-    font-family: 'Atkinson';
-    src: url('/fonts/atkinson-regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  
-  @font-face {
-    font-family: 'Atkinson';
-    src: url('/fonts/atkinson-bold.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-  
   body {
-    font-family: 'Atkinson', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
   
   /* Hide elements until JS loads */

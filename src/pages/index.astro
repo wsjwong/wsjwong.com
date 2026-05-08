@@ -19,7 +19,8 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/")
 
 const posts = await getCollection("blog");
 const sortedPosts = getSortedPosts(posts);
-const latestPosts = sortedPosts.slice(0, SITE.postPerIndex);
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 ---
 
 <Layout description={SITE.desc}>
@@ -28,17 +29,17 @@ const latestPosts = sortedPosts.slice(0, SITE.postPerIndex);
   <Header />
   <main id="main-content" data-layout="index">
     <section id="hero" class="pt-6 pb-4">
-      <div class="flex flex-col sm:flex-row items-start gap-4">
-        <a href={`${baseUrl}about`} class="block mx-auto sm:mx-0 group">
-          <img 
-            src={`${baseUrl}peter-avatar.jpg`} 
-            alt="Joe Wong" 
-            class="w-40 h-40 rounded-full object-cover flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl"
+      <div class="flex flex-col items-start gap-4 sm:flex-row">
+        <a href={`${baseUrl}about`} class="group mx-auto block sm:mx-0">
+          <img
+            src={`${baseUrl}peter-avatar.jpg`}
+            alt="Joe Wong"
+            class="h-40 w-40 flex-shrink-0 rounded-full object-cover transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl"
           />
         </a>
-        <div class="flex-1 text-center sm:text-left">
-          <div class="flex items-center gap-2 justify-center sm:justify-start">
-            <h1 class="my-2 inline-block text-2xl font-bold sm:my-4 sm:text-3xl">
+        <div class="w-full min-w-0 flex-1 text-center sm:text-left">
+          <div class="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+            <h1 class="my-2 inline-block break-words text-2xl font-bold sm:my-4 sm:text-3xl">
               Joe Wong (@wsjwong)
             </h1>
             <a
@@ -48,19 +49,12 @@ const latestPosts = sortedPosts.slice(0, SITE.postPerIndex);
               aria-label="rss feed"
               title="RSS Feed"
             >
-              <IconRss
-                width={20}
-                height={20}
-                class="scale-125 stroke-accent stroke-3"
-              />
+              <IconRss width={20} height={20} class="scale-125 stroke-accent stroke-3" />
               <span class="sr-only">RSS Feed</span>
             </a>
           </div>
-          <p>
-            Building products, sharing notes, and shipping in public.
-          </p>
+          <p class="mx-auto max-w-prose sm:mx-0">Building products, sharing notes, and shipping in public.</p>
           {
-            // only display if at least one social link is enabled
             SOCIALS.filter((social) => social.active).length > 0 && (
               <div class="mt-4 flex flex-row items-center justify-center sm:justify-start">
                 <Socials />
@@ -73,16 +67,104 @@ const latestPosts = sortedPosts.slice(0, SITE.postPerIndex);
 
     <Hr />
 
-    {latestPosts.length > 0 && (
-      <section id="latest-posts" class="pt-12 pb-6">
-        <h2 class="text-2xl font-semibold tracking-wide">Latest</h2>
-        <ul class="mt-4">
-          {latestPosts.map((data) => (
-            <Card variant="h3" {...data} showImage={false} />
-          ))}
-        </ul>
-      </section>
-    )}
+    <section id="timeline" class="pt-8 pb-6">
+      <h2 class="text-2xl font-semibold tracking-wide">Now</h2>
+      <ul class="mt-4 space-y-4">
+        <li class="rounded-lg bg-secondary/40 p-4">
+          <div class="text-sm opacity-75">18 Sep 2025</div>
+          <div>
+            Launched
+            <a
+              class="text-accent underline"
+              href="https://professionalportrait.ai/?utm_source=wsjwong.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Portrait AI for Professionals</a>
+            to create a stunning portrait from a selfie.
+          </div>
+        </li>
+        <li class="rounded-lg bg-secondary/40 p-4">
+          <div class="text-sm opacity-75">16 Feb 2024</div>
+          <div>
+            Launched
+            <a
+              class="text-accent underline"
+              href="https://simplemetrics.xyz?utm_source=wsjwong.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >AI for Sheets</a>
+            to automate AI in Google Sheets.
+            <div class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+              <span><strong>2,220,000</strong> Downloads</span>
+              <span><strong>4.9</strong> Rating</span>
+            </div>
+          </div>
+        </li>
+        <li class="rounded-lg bg-secondary/40 p-4">
+          <div class="text-sm opacity-75">Apr 2022 – Nov 2023</div>
+          <div>
+            Wrote on Instagram
+            <a
+              class="text-accent underline"
+              href="https://instagram.com/joe.invest"
+              target="_blank"
+              rel="noopener noreferrer"
+            >@joe.invest</a>
+            covering business in Chinese.
+            <div class="mt-2 text-sm"><strong>3,500</strong> Followers</div>
+          </div>
+        </li>
+        <li class="rounded-lg bg-secondary/40 p-4">
+          <div class="text-sm opacity-75">Jan 2021 – Nov 2022</div>
+          <div>
+            Hosted
+            <a
+              class="text-accent underline"
+              href="https://www.youtube.com/playlist?list=PL34gII-hLXFiZzKGB1rmgrjpymoo1fcVD"
+              target="_blank"
+              rel="noopener noreferrer"
+            >ETF觀察室</a>
+            podcast covering ETF investing in Cantonese.
+            <div class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+              <span><strong>67,942</strong> Total plays</span>
+              <span><strong>3,219</strong> Hours listened</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <Hr />
+
+    {
+      featuredPosts.length > 0 && (
+        <>
+          <section id="featured" class="pt-12 pb-6">
+            <h2 class="text-2xl font-semibold tracking-wide">Featured posts</h2>
+            <ul>
+              {featuredPosts.map((data) => (
+                <Card variant="h3" {...data} showImage={false} />
+              ))}
+            </ul>
+          </section>
+          {recentPosts.length > 0 && <Hr />}
+        </>
+      )
+    }
+
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts" class="pt-12 pb-6">
+          <h2 class="text-2xl font-semibold tracking-wide">Latest</h2>
+          <ul class="mt-4">
+            {recentPosts.map(
+              (data, index) =>
+                index < SITE.postPerIndex && <Card variant="h3" {...data} showImage={false} />
+            )}
+          </ul>
+        </section>
+      )
+    }
 
     <div class="my-8 text-center">
       <LinkButton href={`${baseUrl}posts/`}>
@@ -96,8 +178,7 @@ const latestPosts = sortedPosts.slice(0, SITE.postPerIndex);
 
 <script define:vars={{ baseUrl }}>
   document.addEventListener("astro:page-load", () => {
-    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
-      ?.dataset?.layout;
+    const indexLayout = document.querySelector("#main-content")?.dataset?.layout;
     if (indexLayout) {
       sessionStorage.setItem("backUrl", baseUrl);
     }

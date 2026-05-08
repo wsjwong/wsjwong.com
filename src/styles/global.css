@@ -3,108 +3,114 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-/* Font definitions */
-@font-face {
-  font-family: "Atkinson";
-  src: url("../fonts/atkinson-regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Atkinson";
-  src: url("../fonts/atkinson-bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root,
 html[data-theme="light"] {
-  --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
-  --muted: #e6e6e6;
-  --border: #ece9e9;
+  color-scheme: light;
+  --background: 255 255 255;
+  --foreground: 34 41 57;
+  --accent: 35 55 255;
+  --accent-dark: 0 13 138;
+  --muted: 229 233 240;
+  --secondary: 229 233 240;
+  --border: 229 233 240;
 }
 
 html[data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --muted: #343f60bf;
-  --border: #ab4b08;
+  color-scheme: dark;
+  --background: 15 18 25;
+  --foreground: 229 233 240;
+  --accent: 125 143 255;
+  --accent-dark: 35 55 255;
+  --muted: 34 41 57;
+  --secondary: 34 41 57;
+  --border: 96 115 159;
 }
 
 @theme {
   --color-*: initial;
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-muted: var(--muted);
-  --color-border: var(--border);
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-accent: rgb(var(--accent));
+  --color-muted: rgb(var(--muted));
+  --color-secondary: rgb(var(--secondary));
+  --color-border: rgb(var(--border));
 }
 
 @layer base {
   * {
     @apply border-border outline-accent/75;
     scrollbar-width: auto;
-    scrollbar-color: var(--color-muted) transparent;
+    scrollbar-color: rgb(var(--muted)) transparent;
   }
-  
-  /* View Transitions API for smooth theme switching (Safari 18+, Chrome 111+) */
-  :root {
-    view-transition-name: root;
-  }
-  
-  /* Apply to html element as well for better compatibility */
+
+  :root,
   html {
     view-transition-name: root;
   }
-  
-  /* Ensure smooth transition between light and dark themes */
+
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation-duration: 0.25s;
   }
-  
-  /* Customize the transition style */
+
   ::view-transition-old(root) {
     animation: fade-out 0.25s ease-out;
   }
-  
+
   ::view-transition-new(root) {
     animation: fade-in 0.25s ease-out;
   }
-  
+
   @keyframes fade-out {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
-  
+
   @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
-  
+
   html {
     @apply overflow-y-scroll scroll-smooth;
   }
+
   body {
-    @apply flex min-h-svh flex-col bg-background font-mono text-foreground selection:bg-accent/75 selection:text-background;
+    @apply flex min-h-svh flex-col overflow-x-hidden bg-background font-sans text-foreground selection:bg-accent/75 selection:text-background;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-image: linear-gradient(
+      rgb(var(--muted) / 0.5),
+      rgb(var(--background))
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 600px;
   }
+
   a,
   button {
     @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
   }
+
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+
+  main {
+    @apply w-full;
+  }
+
   section,
   footer {
-    @apply mx-auto max-w-3xl px-4;
+    @apply mx-auto w-full max-w-3xl px-4;
   }
 }
 
