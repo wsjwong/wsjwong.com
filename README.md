@@ -1,65 +1,41 @@
 # Joe Wong's Personal Website
 
-This is the source code for my personal website ([wsjwong.com](https://wsjwong.com)), built with [Astro](https://astro.build) and deployed on [Cloudflare Pages](https://pages.cloudflare.com).
+Source code for [wsjwong.com](https://wsjwong.com), Joe Wong's personal website and blog.
 
-## About
+Built with [Astro](https://astro.build) and deployed on [Cloudflare Pages](https://pages.cloudflare.com).
 
-I'm Joe Wong (@wsjwong). This website hosts my personal blog and updates on products I'm building.
+## Commands
+
+| Command | Action |
+| :-- | :-- |
+| `npm install` | Install dependencies |
+| `npm run check` | Run Biome checks |
+| `npm run build` | Build the production site to `./dist/` |
+| `npm run preview` | Preview the built site locally |
 
 ## Project Structure
 
 ```text
-├── public/               # Static assets (images, fonts, favicon)
-│   ├── assets/          # Images for blog posts
-│   └── fonts/           # Web fonts
-├── src/
-│   ├── assets/          # Icons and images used in components
-│   ├── components/      # Reusable UI components
-│   │   └── ui/          # React components
-│   ├── content/         # Content collections
-│   │   └── blog/        # Blog posts in Markdown format (organized by year)
-│   ├── layouts/         # Page layouts and templates
-│   ├── pages/           # Routes and pages
-│   ├── styles/          # Global styles and CSS
-│   └── utils/           # Utility functions
-├── astro.config.mjs     # Astro configuration
-├── vercel.json          # Vercel deployment and CSP configuration
-├── package.json         # Project dependencies and scripts
-├── tailwind.config.mjs  # Tailwind CSS configuration
-└── LICENSE              # Dual license (CC BY 4.0 + MIT)
+public/              Static assets
+  blog-images/       Images used by current posts
+src/
+  components/        Reusable UI components
+  content/blog/      Blog posts
+  layouts/           Page layouts
+  pages/             Astro routes
+  styles/            Global styles
+  utils/             Utility functions
+astro.config.mjs     Astro configuration
+package.json         Dependencies and scripts
 ```
-
-## Commands
-
-| Command                | Action                                      |
-| :--------------------- | :------------------------------------------ |
-| `npm install`          | Installs dependencies                       |
-| `npm run dev`          | Starts local dev server at `localhost:4321` |
-| `npm run build`        | Build the production site to `./dist/`      |
-| `npm run preview`      | Preview the build locally, before deploying |
 
 ## Deployment
 
-This site deploys to the Cloudflare Pages project `wsjwong`.
-Pushes to `main` in `wsjwong/wsjwong.com` deploy through Cloudflare Pages' Git integration.
-
-## Newsletter subscription
-
-The newsletter form submits to the local endpoint `POST /api/subscribe` (Cloudflare Pages Function in `functions/api/subscribe.ts`).
-
-Required env var (set in your Cloudflare Pages project or local env):
-
-- `NEON_DATABASE_URL` (preferred) or `DATABASE_URL` (Postgres connection string)
+Pushes to `main` in `wsjwong/wsjwong.com` deploy through Cloudflare Pages.
 
 ## License
 
-This repository uses dual licensing:
+- Documentation and blog posts: CC BY 4.0
+- Code: MIT
 
-- **Documentation & Blog Posts**: Licensed under [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/)
-- **Code & Code Snippets**: Licensed under the [MIT License](LICENSE)
-
-See the [LICENSE](LICENSE) file for full details.
-
-## Special Thanks
-
-Special thanks to [Sat Naing](https://github.com/satnaing) for creating the excellent [AstroPaper theme](https://astro-paper.pages.dev/) that served as the foundation for this website. Their thoughtful design and clean architecture made it a joy to build upon.
+See [LICENSE](LICENSE) for details.

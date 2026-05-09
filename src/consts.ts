@@ -37,7 +37,7 @@ export const SITE: Site = {
   desc: "Building products, sharing notes, and shipping in public.",
   title: "Joe Wong",
   // Kept filename for theme compatibility (we overwrite the image asset)
-  ogImage: "peter-avatar.jpg",
+  ogImage: "avatar.jpg",
   lightAndDarkMode: true,
   postPerIndex: 10,
   postPerPage: 10,
