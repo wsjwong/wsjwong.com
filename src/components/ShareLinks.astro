@@ -1,12 +1,11 @@
 ---
-import IconBlueSky from "@/assets/icons/IconBlueSky.svg";
 import IconBrandX from "@/assets/icons/IconBrandX.svg";
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconLinkedin from "@/assets/icons/IconLinkedin.svg";
 import IconMail from "@/assets/icons/IconMail.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
-import { SHARE_LINKS } from "@/constants";
+import { SHARE_LINKS } from "@/site.config";
 import LinkButton from "./LinkButton.astro";
 
 const URL = Astro.url;
@@ -15,7 +14,6 @@ const iconMap = {
   whatsapp: IconWhatsapp,
   facebook: IconFacebook,
   twitter: IconBrandX,
-  bluesky: IconBlueSky,
   linkedin: IconLinkedin,
   telegram: IconTelegram,
   mail: IconMail,

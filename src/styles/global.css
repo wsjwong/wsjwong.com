@@ -79,6 +79,13 @@ html[data-theme="dark"] {
     }
   }
 
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+  }
+
   html {
     @apply overflow-y-scroll scroll-smooth bg-background;
   }
@@ -106,11 +113,6 @@ html[data-theme="dark"] {
 
   main {
     @apply w-full;
-  }
-
-  section,
-  footer {
-    @apply mx-auto w-full max-w-4xl px-4;
   }
 }
 

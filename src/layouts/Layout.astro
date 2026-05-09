@@ -1,6 +1,6 @@
 ---
-import { ViewTransitions } from "astro:transitions";
-import { SITE } from "@/config";
+import { ClientRouter } from "astro:transitions";
+import { SITE } from "@/site.config";
 import "@/styles/global.css";
 import Analytics from "@/components/Analytics.astro";
 
@@ -140,24 +140,15 @@ const structuredData: Record<string, unknown> = {
       )
     }
 
-    <ViewTransitions />
+    <ClientRouter />
 
     <script is:inline src={withBase("toggle-theme.js")}></script>
 
     <!-- Twitter Widget Script -->
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script is:inline async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </head>
   <body>
     <slot />
     <Analytics />
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    min-height: 100%;
-  }
-</style>

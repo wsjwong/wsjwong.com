@@ -1,11 +1,11 @@
 ---
-import IconArchive from "@/assets/icons/IconArchive.svg";
 import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
 import IconMoon from "@/assets/icons/IconMoon.svg";
 import IconSearch from "@/assets/icons/IconSearch.svg";
 import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
 import IconX from "@/assets/icons/IconX.svg";
-import { SITE } from "@/config";
+import { SITE } from "@/site.config";
+import Container from "./Container.astro";
 import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
 
@@ -38,13 +38,13 @@ const isActive = (path: string) => {
   >
     Skip to content
   </a>
-  <div
+  <Container
     id="nav-container"
-    class="mx-auto flex w-full max-w-4xl flex-col items-center justify-between sm:flex-row"
+    class="flex flex-col items-center justify-between sm:flex-row"
   >
     <div
       id="top-nav-wrap"
-      class="relative flex w-full items-baseline justify-between p-4 sm:items-center sm:py-6"
+      class="relative flex w-full items-baseline justify-between py-4 sm:items-center sm:py-6"
     >
       <a
         href={withBase("/")}
@@ -90,26 +90,6 @@ const isActive = (path: string) => {
               About
             </a>
           </li>
-          {
-            SITE.showArchives && (
-              <li class="col-span-2">
-                <LinkButton
-                  href={withBase("/archives")}
-                  class:list={[
-                    "focus-outline flex justify-center p-3 sm:p-1",
-                    {
-                      "active-nav [&>svg]:stroke-accent": isActive("/archives"),
-                    },
-                  ]}
-                  ariaLabel="archives"
-                  title="Archives"
-                >
-                  <IconArchive class="hidden sm:inline-block" />
-                  <span class="sm:sr-only">Archives</span>
-                </LinkButton>
-              </li>
-            )
-          }
           <li class="col-span-1 flex items-center justify-center">
             <LinkButton
               href={withBase("/search")}
@@ -143,7 +123,7 @@ const isActive = (path: string) => {
         </ul>
       </nav>
     </div>
-  </div>
+  </Container>
   <Hr />
 </header>
 

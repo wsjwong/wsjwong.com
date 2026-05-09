@@ -3,14 +3,15 @@ import { getCollection } from "astro:content";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import IconRss from "@/assets/icons/IconRss.svg";
 import Card from "@/components/Card.astro";
+import Container from "@/components/Container.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import Hr from "@/components/Hr.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import Socials from "@/components/Socials.astro";
 import StructuredData from "@/components/StructuredData.astro";
-import { SITE, SOCIALS } from "@/config";
 import Layout from "@/layouts/Layout.astro";
+import { SITE, SOCIALS } from "@/site.config";
 import getSortedPosts from "@/utils/getSortedPosts";
 
 const baseUrl = import.meta.env.BASE_URL.endsWith("/")
@@ -28,7 +29,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
   <StructuredData type="Person" data={{}} />
   <Header />
   <main id="main-content" data-layout="index">
-    <section id="hero" class="pt-6 pb-4">
+    <Container as="section" id="hero" class="pt-6 pb-4">
       <div class="flex flex-col items-start gap-4 sm:flex-row">
         <a href={`${baseUrl}about`} class="group mx-auto block sm:mx-0">
           <img
@@ -63,11 +64,11 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           }
         </div>
       </div>
-    </section>
+    </Container>
 
     <Hr />
 
-    <section id="timeline" class="pt-8 pb-6">
+    <Container as="section" id="timeline" class="pt-8 pb-6">
       <h2 class="text-2xl font-semibold tracking-wide">Now</h2>
       <ul class="mt-4 space-y-4">
         <li class="rounded-lg bg-secondary/40 p-4">
@@ -132,21 +133,21 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           </div>
         </li>
       </ul>
-    </section>
+    </Container>
 
     <Hr />
 
     {
       featuredPosts.length > 0 && (
         <>
-          <section id="featured" class="pt-12 pb-6">
+          <Container as="section" id="featured" class="pt-12 pb-6">
             <h2 class="text-2xl font-semibold tracking-wide">Featured posts</h2>
             <ul>
               {featuredPosts.map((data) => (
                 <Card variant="h3" {...data} showImage={false} />
               ))}
             </ul>
-          </section>
+          </Container>
           {recentPosts.length > 0 && <Hr />}
         </>
       )
@@ -154,7 +155,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
     {
       recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
+        <Container as="section" id="recent-posts" class="pt-12 pb-6">
           <h2 class="text-2xl font-semibold tracking-wide">Latest</h2>
           <ul class="mt-4">
             {recentPosts.map(
@@ -162,21 +163,21 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
                 index < SITE.postPerIndex && <Card variant="h3" {...data} showImage={false} />
             )}
           </ul>
-        </section>
+        </Container>
       )
     }
 
-    <div class="my-8 text-center">
+    <Container class="my-8 text-center">
       <LinkButton href={`${baseUrl}posts/`}>
         All Posts
         <IconArrowRight class="inline-block" />
       </LinkButton>
-    </div>
+    </Container>
   </main>
   <Footer />
 </Layout>
 
-<script define:vars={{ baseUrl }}>
+<script is:inline define:vars={{ baseUrl }}>
   document.addEventListener("astro:page-load", () => {
     const indexLayout = document.querySelector("#main-content")?.dataset?.layout;
     if (indexLayout) {

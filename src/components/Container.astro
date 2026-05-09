@@ -1,0 +1,27 @@
+---
+export interface Props {
+  as?: "div" | "header" | "main" | "section" | "footer";
+  size?: "site" | "content";
+  noPadding?: boolean;
+  class?: string;
+  id?: string;
+  [key: string]: unknown;
+}
+
+const { as = "div", size = "site", noPadding = false, class: className, ...attrs } = Astro.props;
+
+const Element = as;
+const maxWidth = size === "content" ? "max-w-3xl" : "max-w-4xl";
+---
+
+<Element
+  {...attrs}
+  class:list={[
+    "mx-auto w-full",
+    maxWidth,
+    noPadding ? "px-0" : "px-4",
+    className,
+  ]}
+>
+  <slot />
+</Element>

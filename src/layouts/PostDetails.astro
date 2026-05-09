@@ -11,8 +11,8 @@ import NewsletterForm from "@/components/NewsletterForm.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
 import StructuredData from "@/components/StructuredData.astro";
 import Tag from "@/components/Tag.astro";
-import { SITE } from "@/config";
 import Layout from "@/layouts/Layout.astro";
+import { SITE } from "@/site.config";
 import { getPath } from "@/utils/getPath";
 import { calculateReadingTime } from "@/utils/readingTime";
 import { slugifyStr } from "@/utils/slugify";
@@ -384,8 +384,6 @@ const wordCount = (post.body ?? "").split(/\s+/).length;
     // Look for YouTube embeds
     const youtubeEmbedRegex = /\{% youtube (https:\/\/[^\s]+|[a-zA-Z0-9_-]+) %\}/g;
     
-    let foundYoutubeEmbeds = false;
-    
     // Helper to extract a YouTube video ID from various URL formats
     const extractYouTubeId = (input) => {
       let videoId = input;
@@ -411,7 +409,6 @@ const wordCount = (post.body ?? "").split(/\s+/).length;
       const ytMatch = text.match(/\{% youtube (https:\/\/[^\s]+|[a-zA-Z0-9_-]+) %\}/);
 
       if (ytMatch && ytMatch[1]) {
-        foundYoutubeEmbeds = true;
         const videoId = extractYouTubeId(ytMatch[1]);
         const container = document.createElement("div");
         container.className = "youtube-embed-container";
@@ -449,8 +446,7 @@ const wordCount = (post.body ?? "").split(/\s+/).length;
       let hasChanges = false;
 
       // Process YouTube embeds
-      content = content.replace(youtubeEmbedRegex, (match, videoId) => {
-        foundYoutubeEmbeds = true;
+      content = content.replace(youtubeEmbedRegex, (_match, videoId) => {
         hasChanges = true;
         videoId = extractYouTubeId(videoId);
 
