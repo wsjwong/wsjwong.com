@@ -80,7 +80,7 @@ html[data-theme="dark"] {
   }
 
   html {
-    @apply overflow-y-scroll scroll-smooth;
+    @apply overflow-y-scroll scroll-smooth bg-background;
   }
 
   body {
