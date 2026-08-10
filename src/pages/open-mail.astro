@@ -1,0 +1,68 @@
+---
+export const prerender = true;
+---
+
+<!doctype html>
+<html lang="zh-HK">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>開啟郵件</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        background: Canvas;
+        color: CanvasText;
+      }
+      main {
+        width: min(28rem, calc(100% - 3rem));
+        text-align: center;
+      }
+      a {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.75rem 1rem;
+        border-radius: 0.75rem;
+        background: #0a84ff;
+        color: white;
+        font-weight: 600;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>開啟郵件</h1>
+      <p id="status">正在開啟 Mail⋯</p>
+      <a id="open" href="#" hidden>開啟 Mail</a>
+    </main>
+    <script is:inline>
+      const status = document.querySelector("#status");
+      const openButton = document.querySelector("#open");
+
+      try {
+        const messageId = decodeURIComponent(window.location.hash.slice(1));
+        if (!/^<[^<>\s]{1,496}>$/.test(messageId)) {
+          throw new Error("Invalid Message-ID");
+        }
+        const mailUrl = `message://${encodeURIComponent(messageId)}`;
+        openButton.href = mailUrl;
+        openButton.hidden = false;
+        window.setTimeout(() => window.location.assign(mailUrl), 50);
+        window.setTimeout(() => {
+          status.textContent = "如果 Mail 未有自動開啟，請按下面按鈕。";
+        }, 1200);
+      } catch (_error) {
+        status.textContent = "郵件連結無效。";
+      }
+    </script>
+  </body>
+</html>
