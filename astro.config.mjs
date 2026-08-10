@@ -114,7 +114,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        navigateFallback: "/404",
+        navigateFallback: undefined,
         globPatterns: ["**/*.{css,js,html,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}"],
         runtimeCaching: [
           {
